@@ -13,3 +13,12 @@
 .main{
     margin-top: 8%;
 }
+
+#prodImg{
+    height: 100px;
+    width: 175px;
+}
+
+.product{
+    padding: 10px;
+}
