@@ -1,0 +1,15 @@
+
+
+.filters{
+    height: 500px;
+    background-color: red;
+    /* margin-left: 1.5%; */
+    border: 2px solid;
+    border-radius: 5px;
+    padding: 1%;
+    /* position: fixed; */
+}
+
+.main{
+    margin-top: 8%;
+}

@@ -1,0 +1,83 @@
+[
+    {
+        "id": 1001,
+        "name": "SAMSUNG GALAXY S8",
+        "brand":"SAMSUNG",
+        "RAM": 4,
+        "price": 45990,
+        "Description": "64 GB ROM, 12 + 8 MP Camera 3000mAh Battery"
+    },
+    {
+        "id": 1002,
+        "name": "SAMSUNG GALAXY A7",
+        "brand":"SAMSUNG",
+        "RAM": 4,
+        "price": 23990,
+        "Description": "64 GB ROM, 24 + 5 + 8 MP Camera 3300mAh Battery"
+    },
+    {
+        "id": 1003,
+        "name": "SAMSUNG GALAXY On Nxt",
+        "brand":"SAMSUNG",
+        "RAM": 3,
+        "price": 12900,
+        "Description": "64 GB ROM, 13 + 8 MP Camera 3300mAh Battery"
+    },
+    {
+        "id": 1004,
+        "name": "SAMSUNG GALAXY J3 Pro",
+        "brand":"SAMSUNG",
+        "RAM": 2,
+        "price": 7490,
+        "Description": "16 GB ROM, 8 + 5 MP Camera 2600mAh Battery"
+    },
+    {
+        "id": 1005,
+        "name": "Redmi 6",
+        "brand":"Mi",
+        "RAM": 3,
+        "price": 7999,
+        "Description": "32 GB ROM, 12 + 5 + 5 MP Camera 3000mAh Battery"
+    },
+    {
+        "id": 1006,
+        "name": "Redmi Note 5 Pro",
+        "brand":"Mi",
+        "RAM": 4,
+        "price": 14999,
+        "Description": "64 GB ROM, 12 + 5 + 20 MP Camera 4000mAh Battery"
+    },
+    {
+        "id": 1007,
+        "name": "Mi A1",
+        "brand":"Mi",
+        "RAM": 4,
+        "price": 14198,
+        "Description": "64 GB ROM, 12 + 5+ 5 MP Camera 3000mAh Battery"
+    },
+    {
+        "id": 1008,
+        "name": "Mi Mix 2",
+        "brand":"Mi",
+        "RAM": 6,
+        "price": 29999,
+        "Description": "64 GB ROM, 12 + 5 MP Camera 3400mAh Battery"
+    },
+    {
+        "id": 1009,
+        "name": "Nokia 8 Sirocco",
+        "brand":"NOKIA",
+        "RAM": 6,
+        "price": 49500,
+        "Description": "128 GB ROM, 12 + 13 + 5 MP Camera 3260mAh Battery"
+    },
+    {
+        "id": 1010,
+        "name": "Nokia 8",
+        "brand":"NOKIA",
+        "RAM": 4,
+        "price": 35999,
+        "Description": "64 GB ROM, 13 + 13 MP Camera 3000mAh Battery"
+    }
+
+]

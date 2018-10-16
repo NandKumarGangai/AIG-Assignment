@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/main.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body class="container">
+    <div>
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">MYSHOP</a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li class="" id="mobiles"><a href="#">Mobiles</a></li>
+                    <li class="" id="laptops"><a href="#">Laptops</a></li>
+                    <li class="" id="tv"><a href="#">TV'S</a></li>
+                    <li class="" id="accessories"><a href="#">ACCESSORIES</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#"><span class="glyphicon glyphicon-heart"></span> Wish List</a></li>
+                    <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <div class="row main">
+        <div class="col-md-3 filters">
+            <h4>Filters</h4>
+            <h6>Brand</h6>
+            <div class="brands" id="brands">
+                
+            </div> 
+        </div>
+        <div class="col-md-9" id="res">
+
+        </div>
+    </div>
+    <p>
+            For some reason, my form does not want to get the value of a checkbox... I am not sure if it is my coding or not, but when I try and alert() the value, I get undefined as a result. What do I have wrong?
+
+            <head>
+              <script>
+                var lfckv = document.getElementById("lifecheck").checked
+                function exefunction(){
+                  alert(lfckv);
+                }
+              </script>
+            </head>
+            <body>
+              <label><input id="lifecheck" type="checkbox" >Lives</label>
+            </body>
+            EDIT
+            
+            I tried changing it to this
+            
+            function exefunction() {
+                alert(document.getElementById("lifecheck").checked);
+            }
+            But now it doesn't even want to execute. What's going wrong?
+            
+            javascript html checkbox
+            shareimprove this question
+            edited Oct 11 '17 at 13:03
+            
+            Liam
+            15.5k1575125
+            asked Jan 21 '11 at 1:55
+            
+            Sean
+            2,837112945
+            add a comment
+            8 Answers
+            active oldest votes
+            up vote
+            91
+            down vote
+            accepted
+            Place the var lfckv inside the function. When that line is executed, the body isn't parsed yet and the element "lifecheck" doesn't exist. This works perfectly fine:
+            
+            function exefunction() {
+              var lfckv = document.getElementById("lifecheck").checked;
+              alert(lfckv);
+            }
+            <label><input id="lifecheck" type="checkbox" >Lives</label>
+            <button onclick="exefunction()">Check value</button>
+             Run code snippetExpand snippet
+            shareimprove this answer
+            edited Sep 4 at 12:06
+            
+            Community♦
+            11
+            answered Jan 21 '11 at 2:01
+            
+            Elian Ebbing
+            14.8k33749
+            add a comment
+            up vote
+            5
+            down vote
+            You are trying to read the value of your checkbox before it is loaded. The script runs before the checkbox exists. You need to call your script when the page loads:
+            
+            <body onload="dosomething()">
+            
+            Example:
+            
+            http://jsfiddle.net/jtbowden/6dx6A/
+            
+            You are also missing a semi-colon after your first assignment.
+            
+            shareimprove this answer
+            answered Jan 21 '11 at 2:00
+            
+            Jeff B
+            27.1k55379
+            The semicolon is not required for javascript. – Joel Jan 21 '11 at 2:03
+            10
+            Still is good practice. – Jeff B Jan 21 '11 at 4:57
+            add a comment
+            up vote
+            4
+            down vote
+            You can use this code, it can return true or false:
+            
+            $(document).ready(function(){
+              
+              //add selector of your checkbox
+            
+              var status=$('#IdSelector')[0].checked;
+              
+              console.log(status);
+            
+            });
+             Run code snippetExpand snippet
+            shareimprove this answer
+            edited May 25 at 0:02
+            
+            Talk Nerdy To Me
+            6410
+            answered Jan 4 '17 at 16:22
+            
+            rapaelec
+            13013
+            add a comment
+            up vote
+            1
+            down vote
+            The line where you define lfckv is run whenever the browser finds it. When you put it into the head of your document, the browser tries to find lifecheck id before the lifecheck element is created. You must add your script below the lifecheck input in order for your code to work.
+            
+            shareimprove this answer
+            answered Jan 21 '11 at 2:02
+            
+            Joel
+            1,55122339
+            add a comment
+            up vote
+            1
+            down vote
+            try learning jQuery it's a great place to start with javascript and it really simplifies your code and help separate your js from your html. include the js file from google's CDN (https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js)
+            
+            then in your script tag (still in the <head>) use:
+            
+            $(function() {//code inside this function will run when the document is ready
+                alert($('#lifecheck').is(':checked'));
+            
+                $('#lifecheck').change(function() {//do something when the user clicks the box
+                    alert(this.checked);
+                });
+            });
+            shareimprove this answerFor some reason, my form does not want to get the value of a checkbox... I am not sure if it is my coding or not, but when I try and alert() the value, I get undefined as a result. What do I have wrong?
+
+            <head>
+              <script>
+                var lfckv = document.getElementById("lifecheck").checked
+                function exefunction(){
+                  alert(lfckv);
+                }
+              </script>
+            </head>
+            <body>
+              <label><input id="lifecheck" type="checkbox" >Lives</label>
+            </body>
+            EDIT
+            
+            I tried changing it to this
+            
+            function exefunction() {
+                alert(document.getElementById("lifecheck").checked);
+            }
+            But now it doesn't even want to execute. What's going wrong?
+            
+            javascript html checkbox
+            shareimprove this question
+            edited Oct 11 '17 at 13:03
+            
+            Liam
+            15.5k1575125
+            asked Jan 21 '11 at 1:55
+            
+            Sean
+            2,837112945
+            add a comment
+            8 Answers
+            active oldest votes
+            up vote
+            91
+            down vote
+            accepted
+            Place the var lfckv inside the function. When that line is executed, the body isn't parsed yet and the element "lifecheck" doesn't exist. This works perfectly fine:
+            
+            function exefunction() {
+              var lfckv = document.getElementById("lifecheck").checked;
+              alert(lfckv);
+            }
+            <label><input id="lifecheck" type="checkbox" >Lives</label>
+            <button onclick="exefunction()">Check value</button>
+             Run code snippetExpand snippet
+            shareimprove this answer
+            edited Sep 4 at 12:06
+            
+            Community♦
+            11
+            answered Jan 21 '11 at 2:01
+            
+            Elian Ebbing
+            14.8k33749
+            add a comment
+            up vote
+            5
+            down vote
+            You are trying to read the value of your checkbox before it is loaded. The script runs before the checkbox exists. You need to call your script when the page loads:
+            
+            <body onload="dosomething()">
+            
+            Example:
+            
+            http://jsfiddle.net/jtbowden/6dx6A/
+            
+            You are also missing a semi-colon after your first assignment.
+            
+            shareimprove this answer
+            answered Jan 21 '11 at 2:00
+            
+            Jeff B
+            27.1k55379
+            The semicolon is not required for javascript. – Joel Jan 21 '11 at 2:03
+            10
+            Still is good practice. – Jeff B Jan 21 '11 at 4:57
+            add a comment
+            up vote
+            4
+            down vote
+            You can use this code, it can return true or false:
+            
+            $(document).ready(function(){
+              
+              //add selector of your checkbox
+            
+              var status=$('#IdSelector')[0].checked;
+              
+              console.log(status);
+            
+            });
+             Run code snippetExpand snippet
+            shareimprove this answer
+            edited May 25 at 0:02
+            
+            Talk Nerdy To Me
+            6410
+            answered Jan 4 '17 at 16:22
+            
+            rapaelec
+            13013
+            add a comment
+            up vote
+            1
+            down vote
+            The line where you define lfckv is run whenever the browser finds it. When you put it into the head of your document, the browser tries to find lifecheck id before the lifecheck element is created. You must add your script below the lifecheck input in order for your code to work.
+            
+            shareimprove this answer
+            answered Jan 21 '11 at 2:02
+            
+            Joel
+            1,55122339
+            add a comment
+            up vote
+            1
+            down vote
+            try learning jQuery it's a great place to start with javascript and it really simplifies your code and help separate your js from your html. include the js file from google's CDN (https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js)
+            
+            then in your script tag (still in the <head>) use:
+            
+            $(function() {//code inside this function will run when the document is ready
+                alert($('#lifecheck').is(':checked'));
+            
+                $('#lifecheck').change(function() {//do something when the user clicks the box
+                    alert(this.checked);
+                });
+            });
+            shareimprove this answerFor some reason, my form does not want to get the value of a checkbox... I am not sure if it is my coding or not, but when I try and alert() the value, I get undefined as a result. What do I have wrong?
+
+            <head>
+              <script>
+                var lfckv = document.getElementById("lifecheck").checked
+                function exefunction(){
+                  alert(lfckv);
+                }
+              </script>
+            </head>
+            <body>
+              <label><input id="lifecheck" type="checkbox" >Lives</label>
+            </body>
+            EDIT
+            
+            I tried changing it to this
+            
+            function exefunction() {
+                alert(document.getElementById("lifecheck").checked);
+            }
+            But now it doesn't even want to execute. What's going wrong?
+            
+            javascript html checkbox
+            shareimprove this question
+            edited Oct 11 '17 at 13:03
+            
+            Liam
+            15.5k1575125
+            asked Jan 21 '11 at 1:55
+            
+            Sean
+            2,837112945
+            add a comment
+            8 Answers
+            active oldest votes
+            up vote
+            91
+            down vote
+            accepted
+            Place the var lfckv inside the function. When that line is executed, the body isn't parsed yet and the element "lifecheck" doesn't exist. This works perfectly fine:
+            
+            function exefunction() {
+              var lfckv = document.getElementById("lifecheck").checked;
+              alert(lfckv);
+            }
+            <label><input id="lifecheck" type="checkbox" >Lives</label>
+            <button onclick="exefunction()">Check value</button>
+             Run code snippetExpand snippet
+            shareimprove this answer
+            edited Sep 4 at 12:06
+            
+            Community♦
+            11
+            answered Jan 21 '11 at 2:01
+            
+            Elian Ebbing
+            14.8k33749
+            add a comment
+            up vote
+            5
+            down vote
+            You are trying to read the value of your checkbox before it is loaded. The script runs before the checkbox exists. You need to call your script when the page loads:
+            
+            <body onload="dosomething()">
+            
+            Example:
+            
+            http://jsfiddle.net/jtbowden/6dx6A/
+            
+            You are also missing a semi-colon after your first assignment.
+            
+            shareimprove this answer
+            answered Jan 21 '11 at 2:00
+            
+            Jeff B
+            27.1k55379
+            The semicolon is not required for javascript. – Joel Jan 21 '11 at 2:03
+            10
+            Still is good practice. – Jeff B Jan 21 '11 at 4:57
+            add a comment
+            up vote
+            4
+            down vote
+            You can use this code, it can return true or false:
+            
+            $(document).ready(function(){
+              
+              //add selector of your checkbox
+            
+              var status=$('#IdSelector')[0].checked;
+              
+              console.log(status);
+            
+            });
+             Run code snippetExpand snippet
+            shareimprove this answer
+            edited May 25 at 0:02
+            
+            Talk Nerdy To Me
+            6410
+            answered Jan 4 '17 at 16:22
+            
+            rapaelec
+            13013
+            add a comment
+            up vote
+            1
+            down vote
+            The line where you define lfckv is run whenever the browser finds it. When you put it into the head of your document, the browser tries to find lifecheck id before the lifecheck element is created. You must add your script below the lifecheck input in order for your code to work.
+            
+            shareimprove this answer
+            answered Jan 21 '11 at 2:02
+            
+            Joel
+            1,55122339
+            add a comment
+            up vote
+            1
+            down vote
+            try learning jQuery it's a great place to start with javascript and it really simplifies your code and help separate your js from your html. include the js file from google's CDN (https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js)
+            
+            then in your script tag (still in the <head>) use:
+            
+            $(function() {//code inside this function will run when the document is ready
+                alert($('#lifecheck').is(':checked'));
+            
+                $('#lifecheck').change(function() {//do something when the user clicks the box
+                    alert(this.checked);
+                });
+            });
+            shareimprove this answer
+    </p>
+    <script src="./js/index.js"></script>
+</body>
+
+</html>
