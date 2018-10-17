@@ -17,12 +17,14 @@ $(document).ready(function(){
         $("#brands").append('<br>ASUS: <input type="checkbox" name="brand" id="asus">');
         $.get("../JSON/laptops.json", function(data, status){            
             for(d of data){
-                $("#res").append(`<div class="col-md-4 product float-left">
-                <p>${d.name}</p>
-                <img id="prodImg" src="./images/laptops/${d.image}">
+                $("#res").append(`<div class="col-md-4 product float-left well text-center  ">
+                <p class="productName">${d.name}</p>
+                <img class="img-responsive img-thumbnail productImg" id="prodImg" src="./images/laptops/${d.image}">
                 <br>
+                <div class="text-center">
                 <button class="btn glyphicon glyphicon-heart"></button>
-                <button class="btn btn-success" type="button" onClick="alert(${d.id})">Add To Cart</button>
+                <button class="btn btn-success" type="button" onClick="checkStatus(${d.id})">Add To Cart</button>
+                </div>
             `);                              
             }            
         });
@@ -48,4 +50,9 @@ $(document).ready(function(){
         document.getElementById("brands").innerHTML = "";
         document.getElementById("res").innerHTML = "accessories";
     });
+
+    
 });
+function checkStatus(id){
+    alert(id);
+}
