@@ -4,6 +4,7 @@
         "name": "SAMSUNG GALAXY S8",
         "brand":"SAMSUNG",
         "RAM": 4,
+        "image": "samsung-galaxy-s8.jpg",
         "price": 45990,
         "Description": "64 GB ROM, 12 + 8 MP Camera 3000mAh Battery"
     },
@@ -12,6 +13,7 @@
         "name": "SAMSUNG GALAXY A7",
         "brand":"SAMSUNG",
         "RAM": 4,
+        "image": "samsung-galaxy-a7.jpg",
         "price": 23990,
         "Description": "64 GB ROM, 24 + 5 + 8 MP Camera 3300mAh Battery"
     },
@@ -20,6 +22,7 @@
         "name": "SAMSUNG GALAXY On Nxt",
         "brand":"SAMSUNG",
         "RAM": 3,
+        "image": "galaxy-on-nxt-32.jpg",
         "price": 12900,
         "Description": "64 GB ROM, 13 + 8 MP Camera 3300mAh Battery"
     },
@@ -28,6 +31,7 @@
         "name": "SAMSUNG GALAXY J3 Pro",
         "brand":"SAMSUNG",
         "RAM": 2,
+        "image": "samsung-galaxy-j3-pro.jpg",
         "price": 7490,
         "Description": "16 GB ROM, 8 + 5 MP Camera 2600mAh Battery"
     },
@@ -36,6 +40,7 @@
         "name": "Redmi 6",
         "brand":"Mi",
         "RAM": 3,
+        "image": "mi-redmi-6.jpg",
         "price": 7999,
         "Description": "32 GB ROM, 12 + 5 + 5 MP Camera 3000mAh Battery"
     },
@@ -44,6 +49,7 @@
         "name": "Redmi Note 5 Pro",
         "brand":"Mi",
         "RAM": 4,
+        "image": "redmi-note-5-pro.jpg",
         "price": 14999,
         "Description": "64 GB ROM, 12 + 5 + 20 MP Camera 4000mAh Battery"
     },
@@ -52,6 +58,7 @@
         "name": "Mi A1",
         "brand":"Mi",
         "RAM": 4,
+        "image": "mi-mi-a1.jpg",
         "price": 14198,
         "Description": "64 GB ROM, 12 + 5+ 5 MP Camera 3000mAh Battery"
     },
@@ -60,6 +67,7 @@
         "name": "Mi Mix 2",
         "brand":"Mi",
         "RAM": 6,
+        "image": "mi-mi-mix-2.jpg",
         "price": 29999,
         "Description": "64 GB ROM, 12 + 5 MP Camera 3400mAh Battery"
     },
@@ -68,6 +76,7 @@
         "name": "Nokia 8 Sirocco",
         "brand":"NOKIA",
         "RAM": 6,
+        "image": "nokia-8-sirocco.jpg",
         "price": 49500,
         "Description": "128 GB ROM, 12 + 13 + 5 MP Camera 3260mAh Battery"
     },
@@ -76,6 +85,7 @@
         "name": "Nokia 8",
         "brand":"NOKIA",
         "RAM": 4,
+        "image": "nokia-8.jpg",
         "price": 35999,
         "Description": "64 GB ROM, 13 + 13 MP Camera 3000mAh Battery"
     }

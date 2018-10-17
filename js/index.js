@@ -1,25 +1,55 @@
 $(document).ready(function(){
     let dataToShow;
     //document.getElementById("brands") = "";
+    $(".filters").hide();
     $("#mobiles").click(function(){
         //alert("mobiles");
+        $(".filters").show();
+        document.getElementById("res").innerHTML = "";
         document.getElementById("brands").innerHTML = "";
-        document.getElementById("res").innerHTML = "Mobiles";
+        $('#brands').append(`
+            <table>
+                <tr><td>Mi: </td><td>&nbsp;<input type="checkbox" name="brand" id="mi"></td></tr>
+                <tr><td>SAMSUNG: </td><td>&nbsp;<input type="checkbox" name="brand" id="samsung"></td></tr>
+                <tr><td>NOKIA: </td><td>&nbsp;<input type="checkbox" name="brand" id="nokia"></td></tr>
+            </table>
+        `);
+        
+        $.get("../JSON/mobiles.json", function(data, status){            
+            for(d of data){
+                $("#res").append(`<div class="col-md-4 col product well text-center">
+                <p class="productName">${d.name}</p>
+                <img class="img-responsive img-thumbnail productImg" id="prodImgMob" src="./images/mobiles/${d.image}">
+                <br>
+                <div class="text-center">
+                <button class="btn glyphicon glyphicon-heart text-danger"></button>
+                <button class="btn btn-success" type="button" onClick="checkStatus(${d.id})">Add To Cart</button>
+                </div>
+            `);                              
+            }            
+        });
 
     });
 
     $("#laptops").click(function(){
         //alert("laptops");
-        
+        $(".filters").show();
         document.getElementById("brands").innerHTML = "";
-        $("#brands").append('DELL: <input type="checkbox" name="brand" id="dell">');
-        $("#brands").append('<br>HP: <input type="checkbox" name="brand" id="hp">');
-        $("#brands").append('<br>ASUS: <input type="checkbox" name="brand" id="asus">');
+        document.getElementById("res").innerHTML = "";
+        
+        $('#brands').append(`
+            <table>
+                <tr><td>DELL: </td><td>&nbsp;<input type="checkbox" name="brand" id="mi"></td></tr>
+                <tr><td>HP: </td><td>&nbsp;<input type="checkbox" name="brand" id="samsung"></td></tr>
+                <tr><td>ASUS: </td><td>&nbsp;<input type="checkbox" name="brand" id="nokia"></td></tr>
+            </table>
+        `);
+
         $.get("../JSON/laptops.json", function(data, status){            
             for(d of data){
-                $("#res").append(`<div class="col-md-4 product float-left well text-center  ">
+                $("#res").append(`<div class="col-md-4 product float-left well text-center">
                 <p class="productName">${d.name}</p>
-                <img class="img-responsive img-thumbnail productImg" id="prodImg" src="./images/laptops/${d.image}">
+                <img class="img-responsive img-thumbnail productImg" id="prodImgLaptop" src="./images/laptops/${d.image}">
                 <br>
                 <div class="text-center">
                 <button class="btn glyphicon glyphicon-heart"></button>

@@ -14,9 +14,14 @@
     margin-top: 8%;
 }
 
-#prodImg{
+#prodImgLaptop{
     height: 100px;
     width: 175px;
+}
+
+#prodImgMob{
+    height: 200px;
+    width: 130px;
 }
 
 .product{
