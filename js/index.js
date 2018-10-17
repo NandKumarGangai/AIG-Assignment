@@ -21,6 +21,8 @@ $(document).ready(function(){
                 <p>${d.name}</p>
                 <img id="prodImg" src="./images/laptops/${d.image}">
                 <br>
+                <button class="btn glyphicon glyphicon-heart"></button>
+                <button class="btn btn-success" type="button" onClick="alert(${d.id})">Add To Cart</button>
             `);                              
             }            
         });
