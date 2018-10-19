@@ -1,8 +1,27 @@
+*{
+    box-sizing: border-box;
+    margin: 0%;
+    padding: 0%;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
 
+  .loader {
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    margin: auto;
+    border-top: 16px solid #3498db;
+    width: 120px;
+    height: 120px;
+    -webkit-animation: spin 2s linear infinite; /* Safari */
+    animation: spin 2s linear infinite;
+  }
 
 .filters{
     height: 500px;
-    background-color: red;
+    background-color: azure;
     /* margin-left: 1.5%; */
     border: 2px solid;
     border-radius: 5px;
@@ -25,6 +44,12 @@
 }
 
 .product{
+   
+    box-sizing: border-box;
     padding: 10px;
 }
-
+.btns{ padding: 1% 0;}
+.desc{
+    padding: 1% 0;
+    height: 100%;
+}

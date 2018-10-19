@@ -6,7 +6,7 @@
         "RAM": 4,
         "image": "samsung-galaxy-s8.jpg",
         "price": 45990,
-        "Description": "64 GB ROM, 12 + 8 MP Camera 3000mAh Battery"
+        "description": "64 GB ROM, 12 + 8 MP Camera 3000mAh Battery"
     },
     {
         "id": 1002,
@@ -15,7 +15,7 @@
         "RAM": 4,
         "image": "samsung-galaxy-a7.jpg",
         "price": 23990,
-        "Description": "64 GB ROM, 24 + 5 + 8 MP Camera 3300mAh Battery"
+        "description": "64 GB ROM, 24 + 5 + 8 MP Camera 3300mAh Battery"
     },
     {
         "id": 1003,
@@ -24,7 +24,7 @@
         "RAM": 3,
         "image": "galaxy-on-nxt-32.jpg",
         "price": 12900,
-        "Description": "64 GB ROM, 13 + 8 MP Camera 3300mAh Battery"
+        "description": "64 GB ROM, 13 + 8 MP Camera 3300mAh Battery"
     },
     {
         "id": 1004,
@@ -33,7 +33,7 @@
         "RAM": 2,
         "image": "samsung-galaxy-j3-pro.jpg",
         "price": 7490,
-        "Description": "16 GB ROM, 8 + 5 MP Camera 2600mAh Battery"
+        "description": "16 GB ROM, 8 + 5 MP Camera 2600mAh Battery"
     },
     {
         "id": 1005,
@@ -42,7 +42,7 @@
         "RAM": 3,
         "image": "mi-redmi-6.jpg",
         "price": 7999,
-        "Description": "32 GB ROM, 12 + 5 + 5 MP Camera 3000mAh Battery"
+        "description": "32 GB ROM, 12 + 5 + 5 MP Camera 3000mAh Battery"
     },
     {
         "id": 1006,
@@ -51,7 +51,7 @@
         "RAM": 4,
         "image": "redmi-note-5-pro.jpg",
         "price": 14999,
-        "Description": "64 GB ROM, 12 + 5 + 20 MP Camera 4000mAh Battery"
+        "description": "64 GB ROM, 12 + 5 + 20 MP Camera 4000mAh Battery"
     },
     {
         "id": 1007,
@@ -60,7 +60,7 @@
         "RAM": 4,
         "image": "mi-mi-a1.jpg",
         "price": 14198,
-        "Description": "64 GB ROM, 12 + 5+ 5 MP Camera 3000mAh Battery"
+        "description": "64 GB ROM, 12 + 5+ 5 MP Camera 3000mAh Battery"
     },
     {
         "id": 1008,
@@ -69,7 +69,7 @@
         "RAM": 6,
         "image": "mi-mi-mix-2.jpg",
         "price": 29999,
-        "Description": "64 GB ROM, 12 + 5 MP Camera 3400mAh Battery"
+        "description": "64 GB ROM, 12 + 5 MP Camera 3400mAh Battery"
     },
     {
         "id": 1009,
@@ -78,7 +78,7 @@
         "RAM": 6,
         "image": "nokia-8-sirocco.jpg",
         "price": 49500,
-        "Description": "128 GB ROM, 12 + 13 + 5 MP Camera 3260mAh Battery"
+        "description": "128 GB ROM, 12 + 13 + 5 MP Camera 3260mAh Battery"
     },
     {
         "id": 1010,
@@ -87,7 +87,7 @@
         "RAM": 4,
         "image": "nokia-8.jpg",
         "price": 35999,
-        "Description": "64 GB ROM, 13 + 13 MP Camera 3000mAh Battery"
+        "description": "64 GB ROM, 13 + 13 MP Camera 3000mAh Battery"
     }
 
 ]
