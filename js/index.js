@@ -81,6 +81,15 @@ $(document).ready(function(){
         document.getElementById("res").innerHTML = "accessories";
     });
 
+    $("#others").click(function(){
+        document.getElementById("dropdown_menu").innerHTML = "";
+        $.get("../JSON/categories.json", function(data, status){
+            for(category of data.categories)
+            $("#dropdown_menu").append(`
+            <li><a href="#">${category}</a></li>
+            `);
+        });
+    });
     
 });
 function checkStatus(id){
