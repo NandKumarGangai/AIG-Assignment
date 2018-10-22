@@ -1,5 +1,6 @@
 var cartElements = [];
-var elements = ["hello"];
+var elements = [];
+var wishList = [];
 
 $(document).ready(function(){
     let dataToShow;
@@ -26,7 +27,7 @@ $(document).ready(function(){
         showData("brands", "res", "laptop");
         
 
-        var lfckv = document.getElementById("dell").checked;
+        //var lfckv = document.getElementById("dell").checked;
         //alert(lfckv);
     });
 
@@ -58,8 +59,31 @@ $(document).ready(function(){
         });
     });
     
-    $("").click(function(){
+    $("#cart").click(function(){
+        $(".loader").show();
+        $(".filters").hide();
+        document.getElementById("res").innerHTML = "";
+        document.getElementById("brands").innerHTML = "";    
 
+        for(cartEle of cartElements){
+            $("#res").append(`<div class="col-md-4 col-sm-6 col-xs-12 col-md-offset-2 product float-left well text-center">
+                    <p class="productName">${cartEle.name}</p>
+                    <img class="img-responsive img-thumbnail productImg" id="" src="./images/${cartEle.image}">
+                    <br>
+                    <div class="desc">
+                        <button class="btn btn-link" data-toggle="modal" data-target="#productModel" onClick="showModal()">Know more...</button>
+                        <div>
+                            <h4>&#8377; ${cartEle.price}</h4>
+                        </div>
+                            
+                    </div>
+                    <div class="text-center btns">
+                        
+                        <button class="btn btn-danger" type="button" onClick="removeFromCart(${cartEle.id})">REMOVE</button>
+                    </div>
+                `);
+        }
+        $(".loader").hide();
     });
     
 });
@@ -131,6 +155,24 @@ function addToCart(id){
     console.log(cartElements);
 }
 
+function addToWishList(id){
+    
+    var temp = {};
+    for(ele of elements){
+        if(ele.id == id){
+            temp = ele;
+            break;
+        }
+    }    
+    if(!wishList.includes(temp)){
+        wishList.push(temp);
+        alert("Product Added to WishList...");
+    }else{
+        alert("Product Already in WishList...");
+    }
+    console.log(wishList);
+}
+
 function showModal(name, image, description, price, imgSize){
     // alert(res);
     //console.log(data);
@@ -159,3 +201,19 @@ function showModal(name, image, description, price, imgSize){
 </div>
     `);
 }
+
+function wishLists(){
+    alert("wish");
+}
+
+function removeFromCart(){
+    alert("in remove");
+}
+
+// function cart(){
+//     //$(".main").hide();
+    
+
+    
+// }
+
