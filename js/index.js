@@ -7,7 +7,7 @@ $(document).ready(function(){
     //document.getElementById("brands") = "";
     $(".filters").hide();
     $(".loader").hide();
-    showData("brands", "res", "mobile");
+    //showData("brands", "res", "mobile");
 
     $("#mobiles").click(function(){
         //alert("mobiles");
