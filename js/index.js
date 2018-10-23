@@ -64,31 +64,19 @@ $(document).ready(function(){
         $(".filters").hide();
         document.getElementById("res").innerHTML = "";
         document.getElementById("brands").innerHTML = "";    
-
-        for(cartEle of cartElements){
-            $("#res").append(`<div class="col-md-4 col-sm-6 col-xs-12 col-md-offset-2 product float-left well text-center">
-                    <p class="productName">${cartEle.name}</p>
-                    <img class="img-responsive img-thumbnail productImg" id="" src="./images/${cartEle.image}">
-                    <br>
-                    <div class="desc">
-                        <button class="btn btn-link" data-toggle="modal" data-target="#productModel" onClick="showModal()">Know more...</button>
-                        <div>
-                            <h4>&#8377; ${cartEle.price}</h4>
-                        </div>
-                            
-                    </div>
-                    <div class="text-center btns">
-                        
-                        <button class="btn btn-danger" type="button" onClick="removeFromCart(${cartEle.id})">REMOVE</button>
-                    </div>
-                `);
-        }
+        showCartElements("res");
+        
         $(".loader").hide();
     });
     
 });
 
-
+/**
+ * Showing the products based on category
+ * @param {*} brands 
+ * @param {*} res 
+ * @param {*} category 
+ */
 function showData(brands, res, category){
     elements = [];
     
@@ -103,12 +91,11 @@ function showData(brands, res, category){
                 brandsArray.push(d.brand);
             }
         }
-        console.log(brandsArray);
+        //console.log(brandsArray);
         $('#'+brands).append(`<table>`);
         for(brand of brandsArray){
             $('#'+brands).append(`<tr><td>${brand}: </td><td>&nbsp;<input type="checkbox" name="brand" id=${brand}></td></tr>`);
-        }
-                
+        }                
         $('#'+brands).append(`</table>`);
 
         for(d of data){
@@ -133,20 +120,32 @@ function showData(brands, res, category){
             }                              
         }
         $(".loader").hide();
-        console.log(elements);
+        //console.log(elements);
     });    
 }
 
+/**
+ * Adding elements to cart
+ * @param {*} id 
+ */
 function addToCart(id){
+    console.log(id);
     
     var temp = {};
+    var flag = true;
     for(ele of elements){
         if(ele.id == id){
             temp = ele;
             break;
         }
-    }    
-    if(!cartElements.includes(temp)){
+    } 
+    for(ele of cartElements){
+        if(ele.id == id){
+            flag = false;
+            break;
+        }
+    }   
+    if(flag){
         cartElements.push(temp);
         alert("Product Added to Cart...");
     }else{
@@ -155,16 +154,50 @@ function addToCart(id){
     console.log(cartElements);
 }
 
+/**
+ * Removing a element from a cart
+ * @param {} id 
+ */
+function removeFromCart(id){    
+
+    for(var i=0; i< cartElements.length; i++){
+        if(cartElements[i].id == id){
+            cartElements.splice(i, 1);
+            alert("REMOVED...");
+            break;
+        }
+    }
+    $(".loader").show();
+        $(".filters").hide();
+        document.getElementById("res").innerHTML = "";
+        document.getElementById("brands").innerHTML = "";    
+        showCartElements("res");
+        
+        $(".loader").hide();
+    console.log(cartElements);
+}
+
+/**
+ * Adding a product into wishlist
+ * @param {*} id 
+ */
 function addToWishList(id){
     
     var temp = {};
+    var flag = true;
     for(ele of elements){
         if(ele.id == id){
             temp = ele;
             break;
         }
+    }
+    for(ele of wishList){
+        if(ele.id == id){
+            flag = false;
+            break;
+        }
     }    
-    if(!wishList.includes(temp)){
+    if(flag){
         wishList.push(temp);
         alert("Product Added to WishList...");
     }else{
@@ -173,6 +206,14 @@ function addToWishList(id){
     console.log(wishList);
 }
 
+/**
+ * For showing the pop up type modal 
+ * @param {*} name 
+ * @param {*} image 
+ * @param {*} description 
+ * @param {*} price 
+ * @param {*} imgSize 
+ */
 function showModal(name, image, description, price, imgSize){
     // alert(res);
     //console.log(data);
@@ -206,14 +247,29 @@ function wishLists(){
     alert("wish");
 }
 
-function removeFromCart(){
-    alert("in remove");
+/**
+ * Showing cart elements 
+ * @param {*} res 
+ */
+function showCartElements(res){
+    console.log("in cart");
+    for(cartEle of cartElements){
+        $("#"+res).append(`<div class="col-md-4 col-sm-6 col-xs-12 col-md-offset-2 product float-left well text-center">
+                <p class="productName">${cartEle.name}</p>
+                <img class="img-responsive img-thumbnail productImg" id="" src="./images/${cartEle.image}">
+                <br>
+                <div class="desc">
+                    <button class="btn btn-link" data-toggle="modal" data-target="#productModel" onClick="showModal()">Know more...</button>
+                    <div>
+                        <h4>&#8377; ${cartEle.price}</h4>
+                    </div>
+                        
+                </div>
+                <div class="text-center btns">
+                    
+                    <button class="btn btn-danger" type="button" onClick="removeFromCart(${cartEle.id})">REMOVE</button>
+                </div>
+            `);
+    }
 }
-
-// function cart(){
-//     //$(".main").hide();
-    
-
-    
-// }
 
