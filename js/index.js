@@ -13,6 +13,7 @@ $(document).ready(function(){
         //alert("mobiles");
         $(".loader").show();
         $(".filters").show();
+        $("#filter").show();
         document.getElementById("res").innerHTML = "";
         document.getElementById("brands").innerHTML = "";
         showData("brands", "res", "mobile");
@@ -22,6 +23,7 @@ $(document).ready(function(){
         //alert("laptops");
         $(".filters").show();
         $(".loader").show();
+        $("#filter").show();
         document.getElementById("brands").innerHTML = "";
         document.getElementById("res").innerHTML = "";
         showData("brands", "res", "laptop");
@@ -68,6 +70,16 @@ $(document).ready(function(){
         
         $(".loader").hide();
     });
+
+    $("#wishesList").click(function(){
+        $(".loader").show();
+        $(".filters").hide();
+        document.getElementById("res").innerHTML = "";
+        document.getElementById("brands").innerHTML = "";    
+        showCartElements("res");
+        
+        $(".loader").hide();
+    });
     
 });
 
@@ -75,11 +87,11 @@ $(document).ready(function(){
  * Showing the products based on category
  * @param {*} brands 
  * @param {*} res 
- * @param {*} category 
+ * @param {*} category
  */
 function showData(brands, res, category){
     elements = [];
-    
+    console.log(brands, res, category);
 
     $.get("../JSON/products.json", function(data, status){
         var imgSize;
@@ -92,29 +104,39 @@ function showData(brands, res, category){
             }
         }
         //console.log(brandsArray);
+        
         $('#'+brands).append(`<table>`);
         for(brand of brandsArray){
             $('#'+brands).append(`<tr><td>${brand}: </td><td>&nbsp;<input type="checkbox" name="brand" id=${brand}></td></tr>`);
         }                
         $('#'+brands).append(`</table>`);
 
-        for(d of data){
-            if(d.category == category){                
-                elements.push(d);
+        for(var i=0; i< data.length; i++){
+            var btnClass = "btn btn-success";
+            var btnContent = "Add To Cart";
+            if(data[i].category == category){                
+                elements.push(data[i]);
+                for(cartElement of cartElements){
+                    if(cartElement.id == data[i].id){
+                        btnClass = "btn btn-danger";
+                        btnContent = "Added";
+                        break;
+                    }
+                }
                 $("#"+res).append(`<div class="col-md-4 col-sm-6 col-xs-12 product float-left well text-center">
-                <p class="productName">${d.name}</p>
-                <img class="img-responsive img-thumbnail productImg" id=${imgSize} src="./images/${d.image}">
+                <p class="productName">${data[i].name}</p>
+                <img class="img-responsive img-thumbnail productImg" id=${imgSize} src="./images/${data[i].image}">
                 <br>
                 <div class="desc">
-                    <button class="btn btn-link" data-toggle="modal" data-target="#productModel" onClick="showModal('${d.name}', '${d.image}', '${d.description}', '${d.price}', '${imgSize}')">Know more...</button>
+                    <button class="btn btn-link" data-toggle="modal" data-target="#productModel" onClick="showModal('${data[i].name}', '${data[i].image}', '${data[i].description}', '${data[i].price}', '${imgSize}')">Know more...</button>
                     <div>
-                        <h4>&#8377; ${d.price}</h4>
+                        <h4>&#8377; ${data[i].price}</h4>
                     </div>
                         
                 </div>
                 <div class="text-center btns">
-                    <button class="btn glyphicon glyphicon-heart" onClick="addToWishList(${d.id})"></button>
-                    <button class="btn btn-success" type="button" onClick="addToCart(${d.id})">Add To Cart</button>
+                    <button class="btn glyphicon glyphicon-heart" onClick="addToWishList(${data[i].id})"></button>
+                    <button class="${btnClass}" type="button" onClick="addToCart(${data[i].id}, '${brands}', '${res}', '${category}')">${btnContent}</button>
                 </div>
             `); 
             }                              
@@ -128,7 +150,7 @@ function showData(brands, res, category){
  * Adding elements to cart
  * @param {*} id 
  */
-function addToCart(id){
+function addToCart(id, brands, res, category){
     console.log(id);
     
     var temp = {};
@@ -151,6 +173,13 @@ function addToCart(id){
     }else{
         alert("Product Already in Cart...");
     }
+
+    $(".loader").show();
+        $(".filters").show();
+        $("#filter").show();
+        document.getElementById("res").innerHTML = "";
+        document.getElementById("brands").innerHTML = "";
+    showData("brands", "res", category);
     console.log(cartElements);
 }
 
@@ -167,7 +196,7 @@ function removeFromCart(id){
             break;
         }
     }
-    $(".loader").show();
+        $(".loader").show();
         $(".filters").hide();
         document.getElementById("res").innerHTML = "";
         document.getElementById("brands").innerHTML = "";    
@@ -243,15 +272,46 @@ function showModal(name, image, description, price, imgSize){
     `);
 }
 
-function wishLists(){
-    alert("wish");
+/**
+ * Showing cart elements 
+ * @param {*} res 
+ */
+function showCartElements(res){
+    console.log("in cart");
+    var total=0;
+    for(ele of cartElements){
+        total += ele.price; 
+    }
+    $(".filters").show();
+    $("#filter").hide();
+    $("#brands").append(`
+        <h1>Total Amount is: ${total}</h1>
+    `);
+    for(cartEle of cartElements){
+        $("#"+res).append(`<div class="col-md-4 col-sm-6 col-xs-12 product float-left well text-center">
+                <p class="productName">${cartEle.name}</p>
+                <img class="img-responsive img-thumbnail productImg"  id="prodImgMob" src="./images/${cartEle.image}">
+                <br>
+                <div class="desc">
+                    <button class="btn btn-link" data-toggle="modal" data-target="#productModel" onClick="showModal()">Know more...</button>
+                    <div>
+                        <h4>&#8377; ${cartEle.price}</h4>
+                    </div>
+                        
+                </div>
+                <div class="text-center btns">
+                    
+                    <button class="btn btn-danger" type="button" onClick="removeFromCart(${cartEle.id})">REMOVE</button>
+                </div>
+            `);
+    }
 }
 
 /**
  * Showing cart elements 
  * @param {*} res 
  */
-function showCartElements(res){
+function showWishListElements(res){
     console.log("in cart");
     for(cartEle of cartElements){
         $("#"+res).append(`<div class="col-md-4 col-sm-6 col-xs-12 col-md-offset-2 product float-left well text-center">
