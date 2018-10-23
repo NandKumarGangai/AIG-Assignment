@@ -285,7 +285,9 @@ function showCartElements(res){
     $(".filters").show();
     $("#filter").hide();
     $("#brands").append(`
-        <h1>Total Amount is: ${total}</h1>
+        <h4>Total Items are: ${cartElements.length}</h4>
+        <h4>Total Amount is: ${total}</h4>
+        <button class="btn btn-primary" type="button" onClick="placeOrder(${total})">PLACE ORDER</button>
     `);
     for(cartEle of cartElements){
         $("#"+res).append(`<div class="col-md-4 col-sm-6 col-xs-12 product float-left well text-center">
@@ -331,5 +333,11 @@ function showWishListElements(res){
                 </div>
             `);
     }
+}
+
+function placeOrder(amount){
+    if(amount>0)
+        alert("Order Placed for amount "+amount);
+    else alert("Plz add some items into cart ");
 }
 
