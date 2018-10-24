@@ -2,14 +2,14 @@ var cartElements = [];
 var elements = [];
 var wishList = [];
 
-$(document).ready(function(){
+$(document).ready(function () {
     let dataToShow;
     //document.getElementById("brands") = "";
     $(".filters").hide();
     $(".loader").hide();
     //showData("brands", "res", "mobile");
 
-    $("#mobiles").click(function(){
+    $("#mobiles").click(function () {
         //alert("mobiles");
         $(".loader").show();
         $(".filters").show();
@@ -19,7 +19,7 @@ $(document).ready(function(){
         showData("brands", "res", "mobile");
     });
 
-    $("#laptops").click(function(){
+    $("#laptops").click(function () {
         //alert("laptops");
         $(".filters").show();
         $(".loader").show();
@@ -27,60 +27,60 @@ $(document).ready(function(){
         document.getElementById("brands").innerHTML = "";
         document.getElementById("res").innerHTML = "";
         showData("brands", "res", "laptop");
-        
+
 
         //var lfckv = document.getElementById("dell").checked;
         //alert(lfckv);
     });
 
-    $("#tv").click(function(){
+    $("#tv").click(function () {
         //alert("tv");
         document.getElementById("res").innerHTML = "tv";
         document.getElementById("brands").innerHTML = "";
-        $.get("../JSON/laptops.json", function(data, status){
-            for(d of data){
+        $.get("../JSON/laptops.json", function (data, status) {
+            for (d of data) {
                 $("#res").append(d.name);
-                
-            }            
-        }); 
+
+            }
+        });
     });
 
-    $("#accessories").click(function(){
+    $("#accessories").click(function () {
         //alert("accessories");
         document.getElementById("brands").innerHTML = "";
         document.getElementById("res").innerHTML = "accessories";
     });
 
-    $("#others").click(function(){
+    $("#others").click(function () {
         document.getElementById("dropdown_menu").innerHTML = "";
-        $.get("../JSON/categories.json", function(data, status){
-            for(category of data.categories)
-            $("#dropdown_menu").append(`
+        $.get("../JSON/categories.json", function (data, status) {
+            for (category of data.categories)
+                $("#dropdown_menu").append(`
             <li><a href="#">${category}</a></li>
             `);
         });
     });
-    
-    $("#cart").click(function(){
+
+    $("#cart").click(function () {
         $(".loader").show();
         $(".filters").hide();
         document.getElementById("res").innerHTML = "";
-        document.getElementById("brands").innerHTML = "";    
+        document.getElementById("brands").innerHTML = "";
         showCartElements("res");
-        
+
         $(".loader").hide();
     });
 
-    $("#wishesList").click(function(){
+    $("#wishesList").click(function () {
         $(".loader").show();
         $(".filters").hide();
         document.getElementById("res").innerHTML = "";
-        document.getElementById("brands").innerHTML = "";    
+        document.getElementById("brands").innerHTML = "";
         showCartElements("res");
-        
+
         $(".loader").hide();
     });
-    
+
 });
 
 /**
@@ -89,41 +89,42 @@ $(document).ready(function(){
  * @param {*} res 
  * @param {*} category
  */
-function showData(brands, res, category){
+function showData(brands, res, category) {
     elements = [];
     console.log(brands, res, category);
 
-    $.get("../JSON/products.json", function(data, status){
+    $.get("../JSON/products.json", function (data, status) {
         var imgSize;
-        if(category == "mobile"){ imgSize= "prodImgMob";}else imgSize = "prodImgLaptop";
+        if (category == "mobile") { imgSize = "prodImgMob"; } else imgSize = "prodImgLaptop";
         var brandsArray = [];
-        
-        for(d of data){
-            if(d.category == category && !brandsArray.includes(d.brand)){
+
+        for (d of data) {
+            if (d.category == category && !brandsArray.includes(d.brand)) {
                 brandsArray.push(d.brand);
             }
         }
         //console.log(brandsArray);
-        
-        $('#'+brands).append(`<table>`);
-        for(brand of brandsArray){
-            $('#'+brands).append(`<tr><td>${brand}: </td><td>&nbsp;<input type="checkbox" name="brand" id=${brand}></td></tr>`);
-        }                
-        $('#'+brands).append(`</table>`);
 
-        for(var i=0; i< data.length; i++){
+        $('#' + brands).append(`<table>`);
+        for (brand of brandsArray) {
+            $('#' + brands).append(`<tr><td>${brand}: </td><td>&nbsp;<input type="checkbox" name="brand" id=${brand} onclick="filterBrand('${category}')"></td></tr>`);
+        }
+        $('#' + brands).append(`</table>`);
+
+
+        for (var i = 0; i < data.length; i++) {
             var btnClass = "btn btn-success";
             var btnContent = "Add To Cart";
-            if(data[i].category == category){                
+            if (data[i].category == category) {
                 elements.push(data[i]);
-                for(cartElement of cartElements){
-                    if(cartElement.id == data[i].id){
+                for (cartElement of cartElements) {
+                    if (cartElement.id == data[i].id) {
                         btnClass = "btn btn-danger";
                         btnContent = "Added";
                         break;
                     }
                 }
-                $("#"+res).append(`<div class="col-md-4 col-sm-6 col-xs-12 product float-left well text-center">
+                $("#" + res).append(`<div class="col-md-4 col-sm-6 col-xs-12 product float-left well text-center">
                 <p class="productName">${data[i].name}</p>
                 <img class="img-responsive img-thumbnail productImg" id=${imgSize} src="./images/${data[i].image}">
                 <br>
@@ -138,47 +139,47 @@ function showData(brands, res, category){
                     <button class="btn glyphicon glyphicon-heart" onClick="addToWishList(${data[i].id})"></button>
                     <button class="${btnClass}" type="button" onClick="addToCart(${data[i].id}, '${brands}', '${res}', '${category}')">${btnContent}</button>
                 </div>
-            `); 
-            }                              
+            `);
+            }
         }
         $(".loader").hide();
         //console.log(elements);
-    });    
+    });
 }
 
 /**
  * Adding elements to cart
  * @param {*} id 
  */
-function addToCart(id, brands, res, category){
+function addToCart(id, brands, res, category) {
     console.log(id);
-    
+
     var temp = {};
     var flag = true;
-    for(ele of elements){
-        if(ele.id == id){
+    for (ele of elements) {
+        if (ele.id == id) {
             temp = ele;
             break;
         }
-    } 
-    for(ele of cartElements){
-        if(ele.id == id){
+    }
+    for (ele of cartElements) {
+        if (ele.id == id) {
             flag = false;
             break;
         }
-    }   
-    if(flag){
+    }
+    if (flag) {
         cartElements.push(temp);
         alert("Product Added to Cart...");
-    }else{
+    } else {
         alert("Product Already in Cart...");
     }
 
     $(".loader").show();
-        $(".filters").show();
-        $("#filter").show();
-        document.getElementById("res").innerHTML = "";
-        document.getElementById("brands").innerHTML = "";
+    $(".filters").show();
+    $("#filter").show();
+    document.getElementById("res").innerHTML = "";
+    document.getElementById("brands").innerHTML = "";
     showData("brands", "res", category);
     console.log(cartElements);
 }
@@ -187,22 +188,22 @@ function addToCart(id, brands, res, category){
  * Removing a element from a cart
  * @param {} id 
  */
-function removeFromCart(id){    
+function removeFromCart(id) {
 
-    for(var i=0; i< cartElements.length; i++){
-        if(cartElements[i].id == id){
+    for (var i = 0; i < cartElements.length; i++) {
+        if (cartElements[i].id == id) {
             cartElements.splice(i, 1);
             alert("REMOVED...");
             break;
         }
     }
-        $(".loader").show();
-        $(".filters").hide();
-        document.getElementById("res").innerHTML = "";
-        document.getElementById("brands").innerHTML = "";    
-        showCartElements("res");
-        
-        $(".loader").hide();
+    $(".loader").show();
+    $(".filters").hide();
+    document.getElementById("res").innerHTML = "";
+    document.getElementById("brands").innerHTML = "";
+    showCartElements("res");
+
+    $(".loader").hide();
     console.log(cartElements);
 }
 
@@ -210,26 +211,26 @@ function removeFromCart(id){
  * Adding a product into wishlist
  * @param {*} id 
  */
-function addToWishList(id){
-    
+function addToWishList(id) {
+
     var temp = {};
     var flag = true;
-    for(ele of elements){
-        if(ele.id == id){
+    for (ele of elements) {
+        if (ele.id == id) {
             temp = ele;
             break;
         }
     }
-    for(ele of wishList){
-        if(ele.id == id){
+    for (ele of wishList) {
+        if (ele.id == id) {
             flag = false;
             break;
         }
-    }    
-    if(flag){
+    }
+    if (flag) {
         wishList.push(temp);
         alert("Product Added to WishList...");
-    }else{
+    } else {
         alert("Product Already in WishList...");
     }
     console.log(wishList);
@@ -243,7 +244,7 @@ function addToWishList(id){
  * @param {*} price 
  * @param {*} imgSize 
  */
-function showModal(name, image, description, price, imgSize){
+function showModal(name, image, description, price, imgSize) {
     // alert(res);
     //console.log(data);
     $("#res").append(`
@@ -276,11 +277,11 @@ function showModal(name, image, description, price, imgSize){
  * Showing cart elements 
  * @param {*} res 
  */
-function showCartElements(res){
+function showCartElements(res) {
     console.log("in cart");
-    var total=0;
-    for(ele of cartElements){
-        total += ele.price; 
+    var total = 0;
+    for (ele of cartElements) {
+        total += ele.price;
     }
     $(".filters").show();
     $("#filter").hide();
@@ -289,8 +290,8 @@ function showCartElements(res){
         <h4>Total Amount is: ${total}</h4>
         <button class="btn btn-primary" type="button" onClick="placeOrder(${total})">PLACE ORDER</button>
     `);
-    for(cartEle of cartElements){
-        $("#"+res).append(`<div class="col-md-4 col-sm-6 col-xs-12 product float-left well text-center">
+    for (cartEle of cartElements) {
+        $("#" + res).append(`<div class="col-md-4 col-sm-6 col-xs-12 product float-left well text-center">
                 <p class="productName">${cartEle.name}</p>
                 <img class="img-responsive img-thumbnail productImg"  id="prodImgMob" src="./images/${cartEle.image}">
                 <br>
@@ -313,10 +314,10 @@ function showCartElements(res){
  * Showing cart elements 
  * @param {*} res 
  */
-function showWishListElements(res){
+function showWishListElements(res) {
     console.log("in cart");
-    for(cartEle of cartElements){
-        $("#"+res).append(`<div class="col-md-4 col-sm-6 col-xs-12 col-md-offset-2 product float-left well text-center">
+    for (cartEle of cartElements) {
+        $("#" + res).append(`<div class="col-md-4 col-sm-6 col-xs-12 col-md-offset-2 product float-left well text-center">
                 <p class="productName">${cartEle.name}</p>
                 <img class="img-responsive img-thumbnail productImg" id="" src="./images/${cartEle.image}">
                 <br>
@@ -332,12 +333,69 @@ function showWishListElements(res){
                     <button class="btn btn-danger" type="button" onClick="removeFromCart(${cartEle.id})">REMOVE</button>
                 </div>
             `);
-    }
+    } z
 }
 
-function placeOrder(amount){
-    if(amount>0)
-        alert("Order Placed for amount "+amount);
+function placeOrder(amount) {
+    if (amount > 0)
+        alert("Order Placed for amount " + amount);
     else alert("Plz add some items into cart ");
+}
+
+function filterBrand(category) {
+
+    var brands = document.getElementsByName("brand");
+    var checkedBrands = [];
+    for (b of brands) {
+        if (b.checked) {
+            checkedBrands.push(b.id);
+        }
+    }
+    document.getElementById("res").innerHTML = "";
+    //document.getElementById("brands").innerHTML = "";
+    var imgSize;
+    if (category == "mobile") { imgSize = "prodImgMob"; } else imgSize = "prodImgLaptop";
+
+    if (checkedBrands.length == 0) {
+        document.getElementById("brands").innerHTML = "";
+        showData("brands", "res", category);
+    }
+    else {
+        for (var i = 0; i < elements.length; i++) {
+            var btnClass = "btn btn-success";
+            var btnContent = "Add To Cart";
+            if (checkedBrands.includes(elements[i].brand)) {
+
+                for (cartElement of cartElements) {
+                    if (cartElement.id == elements[i].id) {
+                        btnClass = "btn btn-danger";
+                        btnContent = "Added";
+                        break;
+                    }
+                }
+                $("#res").append(`<div class="col-md-4 col-sm-6 col-xs-12 product float-left well text-center">
+                <p class="productName">${elements[i].name}</p>
+                <img class="img-responsive img-thumbnail productImg" id=${imgSize} src="./images/${elements[i].image}">
+                <br>
+                <div class="desc">
+                    <button class="btn btn-link" data-toggle="modal" data-target="#productModel" onClick="showModal('${elements[i].name}', '${elements[i].image}', '${elements[i].description}', '${elements[i].price}', '${imgSize}')">Know more...</button>
+                    <div>
+                        <h4>&#8377; ${elements[i].price}</h4>
+                    </div>
+                        
+                </div>
+                <div class="text-center btns">
+                    <button class="btn glyphicon glyphicon-heart" onClick="addToWishList(${elements[i].id})"></button>
+                    <button class="${btnClass}" type="button" onClick="addToCart(${elements[i].id}, '${brands}', '${res}', '${category}')">${btnContent}</button>
+                </div>
+            `);
+            }
+        }
+    }
+
+
+
+    console.log(checkedBrands);
+
 }
 
