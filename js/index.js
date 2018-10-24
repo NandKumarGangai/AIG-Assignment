@@ -247,7 +247,10 @@ function addToWishList(id) {
 function showModal(name, image, description, price, imgSize) {
     // alert(res);
     //console.log(data);
-    $("#res").append(`
+    //$("#res").hide();
+    $(".modalView").empty();
+    //$(".modalView").show();
+    $(".modalView").append(`
     <div id="productModel" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
