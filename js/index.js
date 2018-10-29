@@ -92,7 +92,7 @@ $(document).ready(function () {
 function showData(brands, res, category) {
     elements = [];
     console.log(brands, res, category);
-    $.get("http://localhost:8081/", function(data, status){ console.log(data);});
+    
 
     $.get("../JSON/products.json", function (data, status) {
         var imgSize;

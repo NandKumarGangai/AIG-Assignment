@@ -9,12 +9,34 @@
     <!-- <link rel="stylesheet" href="./css/main.css"> -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        .focus {
+      color: #6d0fe7;
+      
+      cursor: pointer;
+      text-decoration: underline;
+      font-weight: bold;
+    }
+    #pages, .pageNumber {
+ padding: 2px;
+    }
+    </style>
 </head>
 
 <body class="container"> 
     <h1>Hello Admin
 
     </h1>
+    <div class="table-responsive table-bordered">
+        <table id="tblData" class="table table-hover">
+            <thead><th>SrNo</th><th>Name</th><th>Brand</th><th>Action</th></thead>
+            <tbody id="product">
+                
+            </tbody>
+        </table>
+    </div>
+    <div id="productInfo"></div>
+    <script src="./js/admin.js"></script>
 </body>
 
 </html>
